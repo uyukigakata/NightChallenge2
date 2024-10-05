@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>検索結果</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .result-item {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>検索結果</h1>
+        {% if no_results %}
+            <p>検索結果が見つかりませんでした。</p>
+        {% else %}
+            {% for result in results %}
+                <div class="result-item">
+                    <h2>{{ result['title'] }}</h2>
+                    <p>{{ result['description'] }}</p>
+                    <p>言語: {{ result['language'] }}</p>
+                    <p>フレームワーク: {{ result['framework'] }}</p>
+                    {% if result['url'] %}
+                        <p>URL: <a href="{{ result['url'] }}">\ここをクリック</a></p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <a href="/" class="back-link">戻る</a>
+    </div>
+</body>
+</html>
